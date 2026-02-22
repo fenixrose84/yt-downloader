@@ -1,18 +1,27 @@
+const projectName = "yt-downloader"
+const apikeyInput = document.querySelector(".apikey-input input");
 const urlInput = document.querySelector(".url-input input");
 const messageEl = document.querySelector(".message");
 const outputPanel = document.querySelector(".output-panel");
 const downloadMenu = outputPanel.querySelector(".download-menu tbody");
 const preview = outputPanel.querySelector(".preview");
 
+let currentApikey = load("apikey", null);
 let data = null;
 let audios = [];
 let videos = [];
 let subtitles = [];
 let isLoading = false;
 
+document.addEventListener("DOMContentLoaded", () => {
+  apikeyInput.value = currentApikey || ""
+});
+
 async function fetchData() {
-  if (isLoading) return;
+  currentApikey = apikeyInput.value
+  if (isLoading || !currentApikey) return;
   isLoading = true;
+  save("apikey", currentApikey)
   const videoId = getVideoId(urlInput.value);
   messageEl.classList.toggle("hidden", videoId);
   if (!videoId) {
@@ -24,7 +33,7 @@ async function fetchData() {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": "b9cfa18b70mshca5c43de2f67d55p1a81bdjsnec2cdad998fa",
+      "x-rapidapi-key": currentApikey,
       "x-rapidapi-host": "youtube-media-downloader.p.rapidapi.com",
     },
   };

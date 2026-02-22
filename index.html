@@ -16,6 +16,10 @@
         <h1 class="title">YouTube Downloader</h1>
         <p class="subtitle">Download YouTube videos, audio and subtitles online for free</p>
 
+        <label class="apikey-input">
+          API key: 
+          <input type="text" placeholder="Enter API key here" onfocus="this.select()" />
+        </label>
         <div class="url-input">
           <input type="text" placeholder="Enter Video URL here" onchange="fetchData()" onfocus="this.select()" />
           <button class="button" onclick="fetchData()"><i class="bi bi-search"></i></button>
