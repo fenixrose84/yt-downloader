@@ -42,9 +42,9 @@ async function fetchData() {
   const result = await response.json();
 
   data = result;
-  audios = result.audios.items;
-  videos = result.videos.items;
-  subtitles = result.subtitles.items;
+  audios = result.audios.items.slice(0, 3);
+  videos = result.videos.items.slice(0, 3);
+  subtitles = result.subtitles.items.slice(0, 3);
 
   updateDownloadMenu();
   updatePreview();
